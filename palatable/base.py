@@ -99,7 +99,7 @@ ROOT_URLCONF = 'palatable.urls'
 WSGI_APPLICATION = 'palatable.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, "templates")
+    os.path.join(BASE_DIR, "templates"),
 )
 
 INSTALLED_APPS = (
