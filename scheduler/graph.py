@@ -1,7 +1,7 @@
 import itertools
 import operator
 
-from models import Course, Student
+from models import Course, Student, ScheduleConfig
 
 import networkx as nx
 
@@ -10,18 +10,20 @@ class CoursesGraph(object):
 
     def __init__(self):
         """
-        Initializes the graph students, courses and their relations (
-        edeges weights)
+        Initializes the graph students, courses, their relations (
+        edges weights), and initial scheduling configurations
         """
         self.graph = nx.Graph()
 
         self.courses = Course.objects.all()
         self.students = Student.objects.all()
+        self.schedule_configs = ScheduleConfig.objects.get(id=1)
 
         self._initialize_nodes()
+        self._initialize_colors()
         self._create_weighted_edges()
 
-        self._color()
+        self._schedule()
 
     def node_degree(self, node):
         """
@@ -44,6 +46,19 @@ class CoursesGraph(object):
               of space.
         """
         self.graph.add_nodes_from(self.courses)
+
+    def _initialize_colors(self):
+        """
+        The coloring scheme for the problem uses a double indexed
+        color R[i][j], where the index (i) represents the day of the
+        exam and (j) represents the exam time slot on a given day.
+
+        - The range of (j), i.e., the number of exam time slots is
+          determined by the registrar and/or the faculty
+        - The range of the index (i) is a parameter generated as an
+          outcome by the algorithm
+        :return:
+        """
 
     def _create_weighted_edges(self):
         """
@@ -131,8 +146,18 @@ class CoursesGraph(object):
 
         return sorted_nodes
 
-    def _color(self):
+    def _schedule(self):
         """
         :return:
         """
-        self._sort_graph()
+        sorted_nodes = self._sort_graph()
+        colored_courses = []
+
+        for i, course in enumerate(sorted_nodes):  # Begin1
+            if len(colored_courses) == len(self.graph):
+                # exit the loop and finish
+                break
+
+            if course not in colored_courses: #Begin 2
+                if i == 0:  # Begin 3
+                    pass

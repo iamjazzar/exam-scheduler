@@ -13,3 +13,11 @@ class Home(TemplateView):
 
 class Schedule(TemplateView):
     template_name = 'schedule.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(Schedule, self).get_context_data(**kwargs)
+
+        a = CoursesGraph()
+        print a.nodes_degree()
+
+        return context

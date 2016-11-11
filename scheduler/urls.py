@@ -7,6 +7,6 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
-    url(r'^$', views.Home.as_view(), name='home'),
-    url(r'^schedule$', views.Schedule.as_view(), name='schedule'),
+    # url(r'^$', views.Home.as_view(), name='home'),
+    url(r'^$', views.Schedule.as_view(), name='schedule'),
 )
