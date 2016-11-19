@@ -1,7 +1,13 @@
 from django.contrib import admin
 
-from models import Course, Student, ScheduleConfig, TimeSlot, Hall, \
-    HallBooking
+from models import Course, Student, ScheduleConfig, Hall, HallBooking
+from scheduler.forms import ScheduleConfigForm, HallBookingForm
+
+
+class HallBookingInline(admin.TabularInline):
+    model = HallBooking
+    form = HallBookingForm
+    extra = 1
 
 
 class StudentAdmin(admin.ModelAdmin):
@@ -10,17 +16,16 @@ class StudentAdmin(admin.ModelAdmin):
     ]
 
 
-class HallBookingInline(admin.TabularInline):  # pylint: disable=C0111
-    model = HallBooking
-
-
 class HallAdmin(admin.ModelAdmin):
     inlines = [
         HallBookingInline,
     ]
 
+
+class ScheduleConfigAdmin(admin.ModelAdmin):
+    form = ScheduleConfigForm
+
 admin.site.register(Course, admin.ModelAdmin)
-admin.site.register(TimeSlot, admin.ModelAdmin)
-admin.site.register(ScheduleConfig, admin.ModelAdmin)
+admin.site.register(ScheduleConfig, ScheduleConfigAdmin)
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Hall, HallAdmin)

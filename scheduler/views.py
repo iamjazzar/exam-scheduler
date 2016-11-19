@@ -2,7 +2,6 @@ from django.utils import timezone
 from django.views.generic import TemplateView
 
 from scheduler.graph import CoursesGraph
-from scheduler.models import HallBooking
 
 
 class Home(TemplateView):
@@ -20,9 +19,7 @@ class Schedule(TemplateView):
         context = super(Schedule, self).get_context_data(**kwargs)
 
         context['data'] = {
-            # 'graph': CoursesGraph().nodes_degree(),
-            'halls': HallBooking.available_halls(timezone.now()),
-            'len': [len(HallBooking.available_halls(timezone.now()))],
+            'graph': CoursesGraph().nodes_degree(),
         }
 
         return context
