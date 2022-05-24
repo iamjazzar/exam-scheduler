@@ -1,6 +1,6 @@
 [run]
 branch = True
-omit = */tests/*, */migrations/*, */urls.py, */settings/*, */wsgi.py, manage.py, fabfile.py
+omit = */tests/*, setup.py, examscheduler/scheduler.py
 source = .
 
 [report]

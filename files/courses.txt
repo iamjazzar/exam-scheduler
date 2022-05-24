@@ -1,0 +1,13 @@
+# ID	Name        			Level	Sections number
+1901204	LogicDesign 			2       3
+1901351	Numerical   			3       5
+1904232	MIS         			2       2
+1904101	Fund		        	1       10
+1901101	DiscreteMathematics    	1       11
+1901466	DistributedSystems 		4       1
+1901472	Compiler    			4       1
+1921326	TestThird   			3       2
+1921425	TestFourth1 			4       3
+1921325	TestThirdTwo			3       5
+1921411	TestFourth2 			4       4
+1921422	TestFourth3 			4       5
