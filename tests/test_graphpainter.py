@@ -3,49 +3,10 @@ from unittest.mock import patch
 from ddt import data, ddt, unpack
 
 from examscheduler.color import Color
-from examscheduler.course import Course
 from examscheduler.graph import Graph
 from examscheduler.graphpainter import GraphPainter
 from examscheduler.student import Student
-from tests.case import TestCase as TestsTestCase
-
-
-class TestCase(TestsTestCase):
-    def setUp(self) -> None:
-        super().setUp()
-        self.graph = self._create_graph()
-
-        self.gp = self._create_graphpainter()
-        self.course = self._create_course()
-
-    def _create_graph(self):
-        g = Graph(directed=False)
-
-        a = self._create_course()
-        b = self._create_course()
-        c = self._create_course()
-        d = self._create_course()
-
-        g.add_edge(a, b)
-        g.add_edge(a, c, weight=2)
-        g.add_edge(b, d)
-
-        return g
-
-    def _create_graphpainter(self):
-        self.days = 10
-        self.slots = 5
-        self.fairness = 2
-
-        return GraphPainter(self.graph, self.days, self.slots, self.fairness)
-
-    def _create_course(self):
-        key = self.fake.bothify(text="#######")
-        name = self.fake.word()
-        level = self.fake.random_digit_not_null()
-        sections = 3
-
-        return Course(key, name, level, sections)
+from tests.case import GraphTestCase as TestCase
 
 
 @ddt
