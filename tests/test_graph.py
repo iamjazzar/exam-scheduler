@@ -32,7 +32,7 @@ class TestGraphDunderMethods(TestCase):
 
     def test_repr(self):
         g = Graph()
-        self.assertEqual(f"<Graph: {id(g)} nodes={len(g.adj_list)}>", repr(g))
+        self.assertEqual(f"<Graph: {id(g)} courses={len(g.adj_list)}>", repr(g))
 
     def test_iter(self):
         g = Graph()
@@ -51,8 +51,8 @@ class TestGraphDunderMethods(TestCase):
             ]
 
         expected = ""
-        for node in g.adj_list.keys():
-            expected += f"node {node}: {g.adj_list[node]} \n"
+        for course in g.adj_list.keys():
+            expected += f"course {course}: {g.adj_list[course]} \n"
 
         self.assertEqual(expected, str(g))
 
@@ -75,7 +75,7 @@ class TestGetAdjacencyList(TestCase):
         self.assertEqual(self.g.adj_list[key], self.g.get_adjacency_list(key))
 
 
-class TestNodeWeight(TestCase):
+class TestCourseWeight(TestCase):
     def test_get_largest_weight(self):
         g = Graph()
         g.adj_list = {
@@ -115,7 +115,7 @@ class TestNodeWeight(TestCase):
         self.assertEqual(2, g.get_weight("a", "c"))
         self.assertEqual(2, g.get_weight("c", "a"))
 
-    def test_directed_get_weight_no_edge_nodes_exist(self):
+    def test_directed_get_weight_no_edge_courses_exist(self):
         g = Graph(directed=True)
         g.adj_list = {
             "a": {("b", 1), ("c", 2)},
@@ -129,7 +129,7 @@ class TestNodeWeight(TestCase):
         self.assertEqual(4, g.get_weight("b", "d"))
         self.assertIsNone(g.get_weight("d", "b"))
 
-    def test_directed_get_weight_no_nodes(self):
+    def test_directed_get_weight_no_courses(self):
         g = Graph(directed=True)
         g.adj_list = {
             "a": {("b", 1), ("c", 2)},
@@ -141,7 +141,7 @@ class TestNodeWeight(TestCase):
         self.assertIsNone(g.get_weight("a", "f"))
         self.assertIsNone(g.get_weight("g", "f"))
 
-    def test_not_directed_get_weight_no_edge_nodes_exist(self):
+    def test_not_directed_get_weight_no_edge_courses_exist(self):
         g = Graph(directed=False)
         g.adj_list = {
             "a": {("b", 1), ("c", 2)},
@@ -152,7 +152,7 @@ class TestNodeWeight(TestCase):
         self.assertIsNone(g.get_weight("b", "c"))
         self.assertIsNone(g.get_weight("c", "b"))
 
-    def test_not_directed_get_weight_no_nodes(self):
+    def test_not_directed_get_weight_no_courses(self):
         g = Graph(directed=False)
         g.adj_list = {
             "a": {("b", 1), ("c", 2)},
@@ -164,7 +164,7 @@ class TestNodeWeight(TestCase):
         self.assertIsNone(g.get_weight("d", "a"))
         self.assertIsNone(g.get_weight("e", "f"))
 
-    def test_set_weight_directed_graph_no_nodes(self):
+    def test_set_weight_directed_graph_no_courses(self):
         g = Graph(directed=True)
 
         with self.assertRaises(ValueError):
@@ -174,7 +174,7 @@ class TestNodeWeight(TestCase):
             g.adj_list = {"a": {("b", 1)}}
             g.set_weight("b", "a", 3)
 
-    def test_set_weight_not_directed_graph_no_nodes(self):
+    def test_set_weight_not_directed_graph_no_courses(self):
         g = Graph(directed=False)
 
         with self.assertRaises(ValueError):
@@ -300,7 +300,7 @@ class TestNodeWeight(TestCase):
         )
 
 
-class TestNodeDegree(TestCase):
+class TestCourseDegree(TestCase):
     def test_get_degree(self):
         g = Graph()
         g.adj_list = {

@@ -1,7 +1,9 @@
 import argparse
 
-from graphbuilder import GraphBuilder
-from graphpainter import GraphPainter
+from tabulate import tabulate
+
+from examscheduler.graphbuilder import GraphBuilder
+from examscheduler.graphpainter import GraphPainter
 
 
 def parse_arguments():
@@ -29,7 +31,7 @@ def parse_arguments():
         "-y",
         type=int,
         required=False,
-        default=20,
+        default=5,
         help=(
             "The number of concurrent exam sessions. Bounded by available "
             "halls, and the availability of faculty to conduct the exams."
@@ -67,6 +69,24 @@ def parse_arguments():
     return parser.parse_args()
 
 
+def print_schedule(colors, days, slots):
+    """
+    Prints the final exam schedule.
+    """
+    table = []
+    for day in range(days):
+        row = []
+        for slot in range(slots):
+            color = colors[day][slot]
+            keys = [course.key for course in color.colored_courses]
+            row.append(" | ".join(keys) if keys else "")
+
+        table.append(row)
+
+    headers = ["day/slot"] + list(range(slots))
+    print(tabulate(table, headers=headers, showindex="always", tablefmt="fancy_grid"))
+
+
 def main():
     # Remove 1st argument from the list of command line arguments
     args = parse_arguments()
@@ -75,6 +95,8 @@ def main():
 
     painter = GraphPainter(graph, args.days, args.slots, fairness=args.fairness)
     painter.paint()
+
+    print_schedule(painter.colors, args.days, args.slots)
 
 
 if __name__ == "__main__":

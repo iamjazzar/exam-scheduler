@@ -7,10 +7,15 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
 setup(
-    name="palatable",
+    name="examscheduler",
     version="0.1.0",
-    packages=["src"],
-    install_requires=[],
+    packages=["examscheduler"],
+    install_requires=["Faker==13.11.1", "tabulate==0.8.9"],
+    entry_points={
+        "console_scripts": [
+            "examscheduler = examscheduler.scheduler:main",
+        ],
+    },
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",

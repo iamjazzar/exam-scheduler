@@ -52,14 +52,14 @@ class GraphBuilder(object):
 
         return all_schedules
 
-    def _process_nodes(self, schedules):
+    def _process_courses(self, schedules):
         """
-        For each node (course), we need to find the set of adjacent nodes, and
-        the weight of the edges connecting the node to its adjacent nodes so that
+        For each course (node), we need to find the set of adjacent courses, and
+        the weight of the edges connecting the course to its adjacent courses so that
         we are able fill in the weights in the adjacency list.
         We also want to set the degree of each course.
 
-        Two nodes are adjacent if the two corresponding courses are
+        Two courses are adjacent if the two corresponding courses are
         registered by at least one student.
         """
         graph = Graph(directed=False)
@@ -74,9 +74,9 @@ class GraphBuilder(object):
                     graph.add_edge(source, destination)
 
         # Set the degree of the course
-        for node in graph:
-            node.degree = graph.get_degree(node)
-            node.largest_weight = graph.get_largest_weight(node)
+        for course in graph:
+            course.degree = graph.get_degree(course)
+            course.largest_weight = graph.get_largest_weight(course)
 
         return graph
 
@@ -84,4 +84,4 @@ class GraphBuilder(object):
         self._read_courses()
         schedules = self._read_schedule()
 
-        return self._process_nodes(schedules)
+        return self._process_courses(schedules)

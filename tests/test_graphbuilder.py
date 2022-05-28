@@ -181,7 +181,7 @@ class TestGraphBuilderReadSchedule(TestCase):
 
 
 @ddt
-class TestGraphBuilderProcessNodes(TestCase):
+class TestGraphBuilderProcessCoruses(TestCase):
     def setUp(self) -> None:
         super().setUp()
 
@@ -219,8 +219,8 @@ class TestGraphBuilderProcessNodes(TestCase):
                 self.fake.random_digit_not_null(),
             )
 
-    def test_process_nodes_undirected_graph(self):
-        graph = self.gb._process_nodes(self.schedules)
+    def test_process_courses_undirected_graph(self):
+        graph = self.gb._process_courses(self.schedules)
         self.assertFalse(graph.directed)
 
     @data(
@@ -231,8 +231,8 @@ class TestGraphBuilderProcessNodes(TestCase):
         {"key1": "1901472", "key2": "1921411"},  # Second schedule
     )
     @unpack
-    def test_process_nodes_edges(self, key1, key2):
-        graph = self.gb._process_nodes(self.schedules)
+    def test_process_courses_edges(self, key1, key2):
+        graph = self.gb._process_courses(self.schedules)
 
         # First schedule edges
         self.assertTrue(graph.contains_edge(Course.get(key1), Course.get(key2)))
@@ -245,13 +245,13 @@ class TestGraphBuilderProcessNodes(TestCase):
         {"key1": "1901472", "key2": "1921411"},  # Second schedule
     )
     @unpack
-    def test_process_nodes_weights_ones(self, key1, key2):
-        graph = self.gb._process_nodes(self.schedules)
+    def test_process_courses_weights_ones(self, key1, key2):
+        graph = self.gb._process_courses(self.schedules)
 
         self.assertEqual(1, graph.get_weight(Course.get(key1), Course.get(key2)))
 
-    def test_process_nodes_weights_more_than_one(self):
-        graph = self.gb._process_nodes(
+    def test_process_courses_weights_more_than_one(self):
+        graph = self.gb._process_courses(
             [
                 [
                     Course.get("1921425"),
@@ -277,8 +277,8 @@ class TestGraphBuilderProcessNodes(TestCase):
         {"key": "1921411", "degree": 1},  # Connected to one course
     )
     @unpack
-    def test_process_nodes_degree(self, key, degree):
-        graph = self.gb._process_nodes(self.schedules)
+    def test_process_courses_degree(self, key, degree):
+        graph = self.gb._process_courses(self.schedules)
 
         self.assertEqual(degree, graph.get_degree(Course.get(key)))
         self.assertEqual(degree, Course.get(key).degree)
@@ -290,8 +290,8 @@ class TestGraphBuilderProcessNodes(TestCase):
         {"key": "1921411"},  # Appears in one schedule
     )
     @unpack
-    def test_process_nodes_largest_weight_ones(self, key):
-        graph = self.gb._process_nodes(self.schedules)
+    def test_process_courses_largest_weight_ones(self, key):
+        graph = self.gb._process_courses(self.schedules)
 
         self.assertEqual(1, graph.get_largest_weight(Course.get(key)))
         self.assertEqual(1, Course.get(key).largest_weight)
@@ -303,8 +303,8 @@ class TestGraphBuilderProcessNodes(TestCase):
         {"key": "1921411", "weight": 0},  # No weights here
     )
     @unpack
-    def test_process_nodes_largest_weight_more_than_one(self, key, weight):
-        graph = self.gb._process_nodes(
+    def test_process_courses_largest_weight_more_than_one(self, key, weight):
+        graph = self.gb._process_courses(
             [
                 [
                     Course.get("1921425"),
@@ -325,8 +325,8 @@ class TestGraphBuilderProcessNodes(TestCase):
 class TestGraphBuilderBuild(TestCase):
     @patch.object(GraphBuilder, "_read_courses")
     @patch.object(GraphBuilder, "_read_schedule")
-    @patch.object(GraphBuilder, "_process_nodes")
-    def test_build(self, mock_process_nodes, mock_read_schedule, mock_read_courses):
+    @patch.object(GraphBuilder, "_process_courses")
+    def test_build(self, mock_process_courses, mock_read_schedule, mock_read_courses):
         slots = self.fake.random_int()
         schedule_path = self.fake.file_path(depth=3)
         courses_path = self.fake.file_path(depth=3)
@@ -336,6 +336,6 @@ class TestGraphBuilderBuild(TestCase):
 
         mock_read_courses.assert_called_once_with()
         mock_read_schedule.assert_called_once_with()
-        mock_process_nodes.assert_called_once_with(mock_read_schedule.return_value)
+        mock_process_courses.assert_called_once_with(mock_read_schedule.return_value)
 
-        self.assertEqual(expected, mock_process_nodes.return_value)
+        self.assertEqual(expected, mock_process_courses.return_value)

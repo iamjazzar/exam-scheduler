@@ -32,7 +32,7 @@ class Graph(object):
     An adjacency list is the most efficient way to store a graph. It allows
     us to store only edges that are present in a graph.
 
-    The adjacency list takes only n+e elements (n is the number of nodes, e is the
+    The adjacency list takes only n+e elements (n is the number of courses, e is the
     number of edges).
     The implementation becomes more space-efficient if a graph is not dense (has a
     small number of edges).
@@ -71,8 +71,8 @@ class Graph(object):
         return weight
 
     def _find_and_set_weight(self, source, destination, weight):
-        for node, old_weight in self.adj_list.get(source, set()):
-            if node == destination:
+        for course, old_weight in self.adj_list.get(source, set()):
+            if course == destination:
                 self.adj_list[source].remove((destination, old_weight))
                 self.adj_list[source].add((destination, weight))
                 return weight
@@ -94,37 +94,37 @@ class Graph(object):
 
         return weight
 
-    def get_degree(self, node):
-        return len(self.adj_list[node])
+    def get_degree(self, course):
+        return len(self.adj_list[course])
 
-    def get_largest_weight(self, node):
+    def get_largest_weight(self, course):
         weight = 0
         try:
-            weight = max(self.adj_list[node], key=itemgetter(1))[1]
+            weight = max(self.adj_list[course], key=itemgetter(1))[1]
         except ValueError:
             pass
 
         return weight
 
-    def get_adjacency_list(self, node):
-        return self.adj_list[node]
+    def get_adjacency_list(self, course):
+        return self.adj_list[course]
 
     def _get_info(self, source, destination):
-        for node, weight in self.adj_list.get(source):
-            if node == destination:
-                return (node, weight)
+        for course, weight in self.adj_list.get(source):
+            if course == destination:
+                return (course, weight)
 
         return None
 
     def __str__(self):
         output = ""
-        for node in self.adj_list.keys():
-            output += f"node {node}: {self.adj_list[node]} \n"
+        for course in self.adj_list.keys():
+            output += f"course {course}: {self.adj_list[course]} \n"
 
         return output
 
     def __repr__(self) -> str:
-        return f"<Graph: {id(self)} nodes={len(self)}>"
+        return f"<Graph: {id(self)} courses={len(self)}>"
 
     def __len__(self):
         return len(self.adj_list)

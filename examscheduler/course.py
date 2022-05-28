@@ -17,7 +17,7 @@ class Course(object):
         - registered students
 
     Each Course represents a node in our graph, which means it has a
-        - list of adjacent nodes
+        - list of adjacent nodes (courses)
         - list of registered students
         - list of weight matrix
         - degree.
@@ -45,8 +45,8 @@ class Course(object):
         self.sections = sections
         self.color = None
 
-        # Set the concurrency level of each node to the number of
-        # sections for the course.
+        # Set the concurrency level of each course to the number of
+        # sections for that course.
         self.concurrency_level = sections
 
         self._students = []
@@ -90,11 +90,11 @@ class Course(object):
 
     def __lt__(self, __o):
         """
-        Sort the nodes in a descending order based on the degree of nodes.
-            - Nodes with similar degrees are ordered based on the largest
+        Sort the courses in a descending order based on the degree of courses.
+            - Courses with similar degrees are ordered based on the largest
               weight w in its adjacency list.
-            - Nodes with similar degrees d and weights w are ordered based on
-              their node ID (smallest ID first).
+            - Courses with similar degrees d and weights w are ordered based on
+              their course ID (smallest ID first).
         """
         if self.degree == __o.degree:
             if self.largest_weight == __o.largest_weight:
