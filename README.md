@@ -1,4 +1,4 @@
-# Palatable [![Tests](https://github.com/iamjazzar/palatable/actions/workflows/ci.yml/badge.svg)](https://github.com/iamjazzar/palatable/actions/workflows/ci.yml) [![PyPI version](https://badge.fury.io/py/djangomako.svg)](https://badge.fury.io/py/djangomako)
+# Palatable [![Tests](https://github.com/iamjazzar/palatable/actions/workflows/ci.yml/badge.svg)](https://github.com/iamjazzar/palatable/actions/workflows/ci.yml) [![PyPI version](https://badge.fury.io/py/palatable.svg)](https://badge.fury.io/py/palatable)
 
 A Fast, reliable Exam Scheduling Algorithm Using Graph Coloring.
 
