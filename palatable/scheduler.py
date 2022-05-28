@@ -2,8 +2,8 @@ import argparse
 
 from tabulate import tabulate
 
-from examscheduler.graphbuilder import GraphBuilder
-from examscheduler.graphpainter import GraphPainter
+from palatable.graphbuilder import GraphBuilder
+from palatable.graphpainter import GraphPainter
 
 
 def parse_arguments():

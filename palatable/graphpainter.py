@@ -1,9 +1,9 @@
 from typing import List
 
-from examscheduler.color import Color
-from examscheduler.course import Course
-from examscheduler.graph import Graph
-from examscheduler.helpers import calculate_distance
+from palatable.color import Color
+from palatable.course import Course
+from palatable.graph import Graph
+from palatable.helpers import calculate_distance
 
 
 class GraphPainter(object):

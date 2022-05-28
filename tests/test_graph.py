@@ -1,7 +1,7 @@
 from collections import defaultdict
 from unittest.mock import patch
 
-from examscheduler.graph import Graph, GraphIterator
+from palatable.graph import Graph, GraphIterator
 from tests.case import TestCase
 
 

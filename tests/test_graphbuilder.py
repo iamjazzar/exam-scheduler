@@ -3,8 +3,8 @@ from unittest.mock import patch
 
 from ddt import data, ddt, unpack
 
-from examscheduler.course import Course
-from examscheduler.graphbuilder import GraphBuilder
+from palatable.course import Course
+from palatable.graphbuilder import GraphBuilder
 from tests.case import TestCase
 
 
@@ -34,14 +34,14 @@ class TestGraphBuilderReadCourses(TestCase):
 
         self.gb = GraphBuilder(slots, schedule_path, courses_path)
 
-    @patch("examscheduler.graphbuilder.read_file", return_value=[])
+    @patch("palatable.graphbuilder.read_file", return_value=[])
     def test_read_courses_no_lines(self, *args):
         courses = self.gb._read_courses()
 
         self.assertEqual(0, len(courses))
         self.assertDictEqual(defaultdict(list), courses)
 
-    @patch("examscheduler.graphbuilder.read_file")
+    @patch("palatable.graphbuilder.read_file")
     def test_read_courses_one_line(self, mock_read_file):
         mock_read_file.return_value = ["1901204	LogicDesign 			2       3"]
         courses = self.gb._read_courses()
@@ -55,7 +55,7 @@ class TestGraphBuilderReadCourses(TestCase):
         self.assertEqual(2, courses[2][0].level)
         self.assertEqual(3, courses[2][0].sections)
 
-    @patch("examscheduler.graphbuilder.read_file")
+    @patch("palatable.graphbuilder.read_file")
     def test_read_courses_multiple_lines(self, mock_read_file):
         mock_read_file.return_value = [
             "1901204	LogicDesign 			2       3",
@@ -103,14 +103,14 @@ class TestGraphBuilderReadSchedule(TestCase):
                 self.fake.random_digit_not_null(),
             )
 
-    @patch("examscheduler.graphbuilder.read_file", return_value=[])
+    @patch("palatable.graphbuilder.read_file", return_value=[])
     def test_read_schedule_no_lines(self, *args):
         schedules = self.gb._read_schedule()
 
         self.assertEqual(0, len(schedules))
         self.assertListEqual([], schedules)
 
-    @patch("examscheduler.graphbuilder.read_file")
+    @patch("palatable.graphbuilder.read_file")
     def test_read_schedule_no_courses_discovered(self, mock_read_file):
         mock_read_file.return_value = [
             "0125897         1921425     1921411     1901472",
@@ -123,7 +123,7 @@ class TestGraphBuilderReadSchedule(TestCase):
         self.assertEqual(0, len(schedules))
         self.assertEqual(0, len(Course._all_courses))
 
-    @patch("examscheduler.graphbuilder.read_file")
+    @patch("palatable.graphbuilder.read_file")
     def test_read_schedule_one_line(self, mock_read_file):
         self._add_courses()
 
@@ -150,7 +150,7 @@ class TestGraphBuilderReadSchedule(TestCase):
             for c in course._students[0]._registered_courses:
                 self.assertIn(c.key, keys)
 
-    @patch("examscheduler.graphbuilder.read_file")
+    @patch("palatable.graphbuilder.read_file")
     def test_read_schedule_multiple_lines(self, mock_read_file):
         self._add_courses()
 

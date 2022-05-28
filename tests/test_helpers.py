@@ -2,7 +2,7 @@ from unittest.mock import mock_open, patch
 
 from ddt import data, ddt
 
-from examscheduler.helpers import calculate_distance, read_file
+from palatable.helpers import calculate_distance, read_file
 from tests.case import TestCase
 
 

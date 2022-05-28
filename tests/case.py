@@ -2,10 +2,10 @@ from unittest import TestCase as UnittestTestCase
 
 from faker import Faker
 
-from examscheduler.course import Course
-from examscheduler.graph import Graph
-from examscheduler.graphpainter import GraphPainter
-from examscheduler.student import Student
+from palatable.course import Course
+from palatable.graph import Graph
+from palatable.graphpainter import GraphPainter
+from palatable.student import Student
 
 
 class TestCase(UnittestTestCase):

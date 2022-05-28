@@ -1,4 +1,4 @@
-from examscheduler.color import Color
+from palatable.color import Color
 from tests.case import TestCase
 
 

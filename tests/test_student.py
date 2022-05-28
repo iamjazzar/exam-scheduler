@@ -1,4 +1,4 @@
-from examscheduler.student import Student
+from palatable.student import Student
 from tests.case import TestCase
 
 

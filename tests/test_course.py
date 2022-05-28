@@ -1,6 +1,6 @@
-from examscheduler.color import Color
-from examscheduler.course import Course
-from examscheduler.student import Student
+from palatable.color import Color
+from palatable.course import Course
+from palatable.student import Student
 from tests.case import TestCase
 
 

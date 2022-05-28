@@ -2,10 +2,10 @@ from unittest.mock import patch
 
 from ddt import data, ddt, unpack
 
-from examscheduler.color import Color
-from examscheduler.graph import Graph
-from examscheduler.graphpainter import GraphPainter
-from examscheduler.student import Student
+from palatable.color import Color
+from palatable.graph import Graph
+from palatable.graphpainter import GraphPainter
+from palatable.student import Student
 from tests.case import GraphTestCase as TestCase
 
 

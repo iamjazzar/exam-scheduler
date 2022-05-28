@@ -1,6 +1,6 @@
 from typing import List
 
-from examscheduler.student import Student
+from palatable.student import Student
 
 
 class Course(object):
