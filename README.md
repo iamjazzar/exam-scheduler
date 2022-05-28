@@ -1,4 +1,4 @@
-# Exam Scheduler [![Tests](https://github.com/iamjazzar/palatable/actions/workflows/ci.yml/badge.svg)](https://github.com/iamjazzar/palatable/actions/workflows/ci.yml)
+# Palatable [![Tests](https://github.com/iamjazzar/palatable/actions/workflows/ci.yml/badge.svg)](https://github.com/iamjazzar/palatable/actions/workflows/ci.yml) [![PyPI version](https://badge.fury.io/py/djangomako.svg)](https://badge.fury.io/py/djangomako)
 
 A Fast, reliable Exam Scheduling Algorithm Using Graph Coloring.
 
@@ -11,21 +11,21 @@ This package presents a graph-coloring-based algorithm for the exam scheduling a
 ## Getting started
 
 ```bash
-pip install examscheduler
+pip install palatable
 ```
 
 ## Usage
 The simplest way to use the package is using this command.
 ```bash
-examscheduler -d files/schedule.txt -c files/courses.txt
+palatable -d files/schedule.txt -c files/courses.txt
 ```
 
 For a list of all available options
 
 ```bash
-examscheduler -h
+palatable -h
 
-usage: examscheduler [-h] [--slots SLOTS] [--days DAYS] [--fairness FAIRNESS] --schedule SCHEDULE --courses COURSES
+usage: palatable [-h] [--slots SLOTS] [--days DAYS] [--fairness FAIRNESS] --schedule SCHEDULE --courses COURSES
 
 optional arguments:
   -h, --help            show this help message and exit

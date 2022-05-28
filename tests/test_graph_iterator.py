@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from examscheduler.graph import GraphIterator
+from palatable.graph import GraphIterator
 from tests.case import TestCase
 
 

@@ -1,10 +1,10 @@
 from collections import defaultdict
 from itertools import combinations
 
-from examscheduler.course import Course
-from examscheduler.graph import Graph
-from examscheduler.helpers import read_file
-from examscheduler.student import Student
+from palatable.course import Course
+from palatable.graph import Graph
+from palatable.helpers import read_file
+from palatable.student import Student
 
 
 class GraphBuilder(object):
